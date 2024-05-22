@@ -1,0 +1,111 @@
+﻿<Window x:Class="WPF_22._05._2024.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_22._05._2024"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="50" x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <TabControl x:Name="MeinTabControl">
+            <TabItem x:Name="Tab1" Header="Aufgabe 1" Background="AliceBlue" BorderThickness="10" BorderBrush="Black" FontSize="25" FontWeight="SemiBold">
+                <Grid Background="AliceBlue">
+                    <Border Background="#FC4100" CornerRadius="50" BorderThickness="10" BorderBrush="Black">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="10" Color="Black"/>
+                        </Border.Effect>
+                    </Border>
+                    <Button x:Name="MeinButton1" Click="MeinButton1_Click" Background="AliceBlue" Style="{DynamicResource ButtonStyle1}" Height="80" Width="200" FontSize="19" Content="Wechsel zu Aufgabe 2" Margin="297,154,297,155"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="Tab2" Header="Aufgabe 2" Background="AliceBlue" BorderThickness="10" BorderBrush="Black" FontSize="25" FontWeight="SemiBold">
+                <Grid x:Name="MeinGrid2" Background="AliceBlue">
+                    <Border x:Name="MeinBorder2" Background="MediumPurple" CornerRadius="50" BorderThickness="10" BorderBrush="Black">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="10" Color="Black"/>
+                        </Border.Effect>
+                    </Border>
+                    <Button x:Name="MeinButton2" Click="MeinButton2_Click"  Background="AliceBlue" Style="{DynamicResource ButtonStyle1}" Height="85" Width="350" FontSize="21" Content="Wechsel die Farbe von Background" Margin="222,144,222,160"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="Tab3" Header="Aufgabe 3" Background="AliceBlue" BorderThickness="10" BorderBrush="Black" FontSize="25" FontWeight="SemiBold">
+                <Grid x:Name="MeinGrid3" Background="AliceBlue">
+                    <Border x:Name="MeinBorder3" Background="YellowGreen" CornerRadius="50" BorderThickness="10" BorderBrush="Black">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="10" ShadowDepth="10" Color="Black"/>
+                        </Border.Effect>
+                    </Border>
+                    <Rectangle x:Name="MeinRectangle3" MouseEnter="MeinRectangle3_MouseEnter" MouseLeave="MeinRectangle3_MouseLeave" Fill="BlueViolet" Height="200" Width="400" Stroke="Black" StrokeThickness="5">
+                    </Rectangle>
+                    <Label x:Name="MeinLabel3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="50" Width="150" Foreground="White" Content="Hello World!" Visibility="Hidden"/>
+                </Grid>
+            </TabItem>
+
+            <TabItem x:Name="Tab4" Header="Aufgabe 4" Background="AliceBlue" BorderBrush="Black" BorderThickness="10" FontSize="25" FontWeight="SemiBold">
+                <Canvas x:Name="MeinCanvas4" Background="AliceBlue" KeyUp="MeinCanvas4_KeyUp" KeyDown="MeinCanvas4_KeyDown">
+                    <Ellipse x:Name="Black" Height="100" Width="100" Fill="DarkGreen" Canvas.Left="347" Canvas.Top="144">
+                    </Ellipse>
+                </Canvas>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window> 
